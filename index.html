@@ -5,79 +5,75 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>เลือกตั้งไทย.com</title>
 <style>
-body { font-family: "TH Sarabun", sans-serif; margin:0; padding:0; background:#f5f5f5;}
-header { text-align:center; padding:20px; background:#004aad; color:white; font-size:24px;}
-#map-container { max-width:1200px; margin:20px auto;}
-.popup { position:absolute; background:white; border:1px solid #333; padding:10px; display:none; box-shadow:2px 2px 5px rgba(0,0,0,0.3);}
-img { margin:3px 0; width:50px; }
+body { font-family:"TH Sarabun", sans-serif; margin:0; padding:0; background:#f5f5f5; }
+header { text-align:center; padding:20px; background:#004aad; color:white; font-size:24px; }
+#map-container { max-width:1200px; margin:20px auto; }
+.popup { position:absolute; background:white; border:1px solid #333; padding:10px; display:none; box-shadow:2px 2px 5px rgba(0,0,0,0.3); font-size:14px; }
+img { width:50px; margin-top:5px; }
 .province:hover { fill:#66a3ff; cursor:pointer; }
 </style>
 </head>
 <body>
-<header>เลือกตั้งไทย.com - ข้อมูลผู้สมัคร</header>
+
+<header>เลือกตั้งไทย.com – ข้อมูลผู้สมัครเลือกตั้ง</header>
 
 <div id="map-container">
-<svg viewBox="0 0 1200 1400" id="svgThailand">
-<!-- ตัวอย่างบางจังหวัด -->
-<path id="bangkok" class="province" d="M500,600 L550,600 L550,650 L500,650 Z" fill="#ccc" stroke="#333"/>
-<text x="505" y="625" font-size="12" fill="black">กรุงเทพ</text>
-
-<path id="chiangmai" class="province" d="M200,100 L250,100 L250,150 L200,150 Z" fill="#ccc" stroke="#333"/>
-<text x="205" y="125" font-size="12" fill="black">เชียงใหม่</text>
-
-<path id="songkhla" class="province" d="M800,1200 L850,1200 L850,1250 L800,1250 Z" fill="#ccc" stroke="#333"/>
-<text x="805" y="1225" font-size="12" fill="black">สงขลา</text>
-
-<!-- จังหวัดอื่น ๆ เพิ่ม path พร้อม id เช่น chiangrai, nakhonratchasima ... -->
+<svg id="map-svg" viewBox="0 0 1051 1849" xmlns="http://www.w3.org/2000/svg">
+  <!-- ตัวอย่างจังหวัดจริง 3 จังหวัด -->
+  <path id="กรุงเทพ" class="province" d="M505,1100 L530,1100 L530,1130 L505,1130 Z" fill="#ccc" stroke="#333"/>
+  <path id="เชียงใหม่" class="province" d="M200,300 L230,300 L230,330 L200,330 Z" fill="#ccc" stroke="#333"/>
+  <path id="สงขลา" class="province" d="M800,1600 L830,1600 L830,1630 L800,1630 Z" fill="#ccc" stroke="#333"/>
+  <!-- สามารถเพิ่ม path ของจังหวัดอื่น ๆ -->
 </svg>
 </div>
 
 <div id="popup" class="popup"></div>
 
 <script>
-// ตัวอย่างข้อมูลผู้สมัคร
+// ข้อมูลตัวอย่างผู้สมัคร
 const data = {
-    "bangkok":[
+    "กรุงเทพ":[
         {district:"เขต 1", candidate:"นาย ค", party:"พรรค Z", photo:"https://via.placeholder.com/50"},
         {district:"เขต 2", candidate:"นาง ง", party:"พรรค W", photo:"https://via.placeholder.com/50"}
     ],
-    "chiangmai":[
+    "เชียงใหม่":[
         {district:"เขต 1", candidate:"นาย ก", party:"พรรค X", photo:"https://via.placeholder.com/50"},
         {district:"เขต 2", candidate:"นาง ข", party:"พรรค Y", photo:"https://via.placeholder.com/50"}
     ],
-    "songkhla":[
+    "สงขลา":[
         {district:"เขต 1", candidate:"นาย ญ", party:"พรรค A", photo:"https://via.placeholder.com/50"},
         {district:"เขต 2", candidate:"นาง ฎ", party:"พรรค B", photo:"https://via.placeholder.com/50"}
     ]
-    // เพิ่มจังหวัดอื่น ๆ ต่อไป
 };
 
 const popup = document.getElementById("popup");
 
-document.querySelectorAll(".province").forEach(el => {
-    el.addEventListener("click", e => {
+// คลิกจังหวัด
+document.querySelectorAll('#map-svg .province').forEach(el=>{
+    el.addEventListener("click", e=>{
         const id = e.target.id;
         const items = data[id];
-        let html = "";
+        let html="";
         if(items){
-            html += "<strong>จังหวัด: " + id.charAt(0).toUpperCase() + id.slice(1) + "</strong><br>";
-            items.forEach(i => {
-                html += i.district + " - " + i.candidate + " (" + i.party + ")<br>";
+            html += "<strong>จังหวัด: "+id+"</strong><br>";
+            items.forEach(i=>{
+                html += i.district+" - "+i.candidate+" ("+i.party+")<br>";
                 html += '<img src="'+i.photo+'" alt="'+i.candidate+'"><br>';
             });
-        } else {
-            html = "<strong>จังหวัด: " + id.charAt(0).toUpperCase() + id.slice(1) + "</strong><br>ยังไม่มีข้อมูล";
+        }else{
+            html = "<strong>จังหวัด: "+id+"</strong><br>ยังไม่มีข้อมูล";
         }
         popup.innerHTML = html;
         popup.style.display = "block";
-        popup.style.left = (e.pageX + 10) + "px";
-        popup.style.top = (e.pageY + 10) + "px";
+        popup.style.left = (e.pageX+10)+"px";
+        popup.style.top = (e.pageY+10)+"px";
     });
 });
 
-document.addEventListener("click", e => {
+// ปิด popup เมื่อคลิกพื้นที่ว่าง
+document.addEventListener("click", e=>{
     if(!e.target.classList.contains("province")){
-        popup.style.display = "none";
+        popup.style.display="none";
     }
 });
 </script>
