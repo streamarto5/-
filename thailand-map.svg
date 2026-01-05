@@ -1,0 +1,13 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+<!-- จังหวัดตัวอย่าง: เพิ่ม id ตามชื่อจังหวัด -->
+<rect id="chiangmai" class="province" x="100" y="50" width="150" height="100" fill="#ccc" stroke="#333"/>
+<text x="120" y="100" font-size="14" fill="black">เชียงใหม่</text>
+
+<rect id="bangkok" class="province" x="350" y="200" width="150" height="100" fill="#ccc" stroke="#333"/>
+<text x="370" y="250" font-size="14" fill="black">กรุงเทพ</text>
+
+<rect id="songkhla" class="province" x="600" y="400" width="150" height="100" fill="#ccc" stroke="#333"/>
+<text x="620" y="450" font-size="14" fill="black">สงขลา</text>
+
+<!-- จังหวัดอื่น ๆ สามารถเพิ่ม id ตามชื่อภาษาอังกฤษได้ เช่น chiangrai, nakhonratchasima ... -->
+</svg>
