@@ -7,7 +7,7 @@
 <style>
 body { font-family: "TH Sarabun", sans-serif; margin:0; padding:0; background:#f5f5f5;}
 header { text-align:center; padding:20px; background:#004aad; color:white; font-size:24px;}
-#map-container { max-width:1000px; margin:20px auto;}
+#map-container { max-width:1200px; margin:20px auto;}
 .popup { position:absolute; background:white; border:1px solid #333; padding:10px; display:none; box-shadow:2px 2px 5px rgba(0,0,0,0.3);}
 img { margin:3px 0; width:50px; }
 .province:hover { fill:#66a3ff; cursor:pointer; }
@@ -17,20 +17,19 @@ img { margin:3px 0; width:50px; }
 <header>เลือกตั้งไทย.com - ข้อมูลผู้สมัคร</header>
 
 <div id="map-container">
-  <!-- Inline SVG แผนที่ประเทศไทย -->
-  <svg viewBox="0 0 800 600" id="svgThailand">
-    <!-- ตัวอย่างจังหวัด -->
-    <path id="chiangmai" class="province" d="M100,50 L250,50 L250,150 L100,150 Z" fill="#ccc" stroke="#333"/>
-    <text x="120" y="100" font-size="14" fill="black">เชียงใหม่</text>
+<svg viewBox="0 0 1200 1400" id="svgThailand">
+<!-- ตัวอย่างบางจังหวัด -->
+<path id="bangkok" class="province" d="M500,600 L550,600 L550,650 L500,650 Z" fill="#ccc" stroke="#333"/>
+<text x="505" y="625" font-size="12" fill="black">กรุงเทพ</text>
 
-    <path id="bangkok" class="province" d="M350,200 L500,200 L500,300 L350,300 Z" fill="#ccc" stroke="#333"/>
-    <text x="370" y="250" font-size="14" fill="black">กรุงเทพ</text>
+<path id="chiangmai" class="province" d="M200,100 L250,100 L250,150 L200,150 Z" fill="#ccc" stroke="#333"/>
+<text x="205" y="125" font-size="12" fill="black">เชียงใหม่</text>
 
-    <path id="songkhla" class="province" d="M600,400 L750,400 L750,500 L600,500 Z" fill="#ccc" stroke="#333"/>
-    <text x="620" y="450" font-size="14" fill="black">สงขลา</text>
+<path id="songkhla" class="province" d="M800,1200 L850,1200 L850,1250 L800,1250 Z" fill="#ccc" stroke="#333"/>
+<text x="805" y="1225" font-size="12" fill="black">สงขลา</text>
 
-    <!-- สามารถเพิ่ม path สำหรับจังหวัดอื่น ๆ พร้อม id -->
-  </svg>
+<!-- จังหวัดอื่น ๆ เพิ่ม path พร้อม id เช่น chiangrai, nakhonratchasima ... -->
+</svg>
 </div>
 
 <div id="popup" class="popup"></div>
@@ -38,23 +37,23 @@ img { margin:3px 0; width:50px; }
 <script>
 // ตัวอย่างข้อมูลผู้สมัคร
 const data = {
-    "chiangmai": [
-        {district:"เขต 1", candidate:"นาย ก", party:"พรรค X", photo:"https://via.placeholder.com/50"},
-        {district:"เขต 2", candidate:"นาง ข", party:"พรรค Y", photo:"https://via.placeholder.com/50"}
-    ],
-    "bangkok": [
+    "bangkok":[
         {district:"เขต 1", candidate:"นาย ค", party:"พรรค Z", photo:"https://via.placeholder.com/50"},
         {district:"เขต 2", candidate:"นาง ง", party:"พรรค W", photo:"https://via.placeholder.com/50"}
     ],
-    "songkhla": [
+    "chiangmai":[
+        {district:"เขต 1", candidate:"นาย ก", party:"พรรค X", photo:"https://via.placeholder.com/50"},
+        {district:"เขต 2", candidate:"นาง ข", party:"พรรค Y", photo:"https://via.placeholder.com/50"}
+    ],
+    "songkhla":[
         {district:"เขต 1", candidate:"นาย ญ", party:"พรรค A", photo:"https://via.placeholder.com/50"},
         {district:"เขต 2", candidate:"นาง ฎ", party:"พรรค B", photo:"https://via.placeholder.com/50"}
     ]
+    // เพิ่มจังหวัดอื่น ๆ ต่อไป
 };
 
 const popup = document.getElementById("popup");
 
-// จับ click ทุกจังหวัด
 document.querySelectorAll(".province").forEach(el => {
     el.addEventListener("click", e => {
         const id = e.target.id;
@@ -76,7 +75,6 @@ document.querySelectorAll(".province").forEach(el => {
     });
 });
 
-// ปิด popup ถ้าคลิกพื้นที่ว่าง
 document.addEventListener("click", e => {
     if(!e.target.classList.contains("province")){
         popup.style.display = "none";
