@@ -1,13 +1,1 @@
-<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" id="svgThailand">
-  <!-- ตัวอย่างจังหวัด 3 จังหวัด -->
-  <path id="chiangmai" class="province" d="M100,50 L250,50 L250,150 L100,150 Z" fill="#ccc" stroke="#333"/>
-  <text x="120" y="100" font-size="14" fill="black">เชียงใหม่</text>
 
-  <path id="bangkok" class="province" d="M350,200 L500,200 L500,300 L350,300 Z" fill="#ccc" stroke="#333"/>
-  <text x="370" y="250" font-size="14" fill="black">กรุงเทพ</text>
-
-  <path id="songkhla" class="province" d="M600,400 L750,400 L750,500 L600,500 Z" fill="#ccc" stroke="#333"/>
-  <text x="620" y="450" font-size="14" fill="black">สงขลา</text>
-
-  <!-- จังหวัดอื่น ๆ สามารถเพิ่ม path พร้อม id ตามชื่อภาษาอังกฤษได้ -->
-</svg>
